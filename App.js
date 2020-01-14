@@ -32,18 +32,20 @@ import { VideoPlayer } from './components/VideoPlayer';
 
 const App = () => {
   const [page, setPage] = useState([])
+  const [locat, setLocat] = useState('sub')
   const [XML, setXML] = useState([]);
   const XMLParser = require('react-xml-parser');
+  const [video, setVideo] = useState(null);
 
   
 
   const getXML = (url, tag) =>
   {
     
-    let stuff = axios.get(url).then(d=>{
+    axios.get(url).then(d=>{
       
       var xmlfile = new XMLParser().parseFromString(d.data);    // Assume xmlText contains the example XML
-      // console.log(xmlfile);
+      console.log(xmlfile);
       // console.log(xmlfile.getElementsByTagName(tag)[0].children,"yeet");
       setXML(xmlfile.getElementsByTagName(tag)[0].children)
       
@@ -55,26 +57,52 @@ const App = () => {
       
   }
 
+  const getXMLSub = (url, tag) =>
+  {
+    console.log('ran sub 1')
+    axios.get(url).then(d=>{
+      console.log('ran sub 2')
+      var xmlfile = new XMLParser().parseFromString(d.data);    // Assume xmlText contains the example XML
+      console.log('sub',xmlfile.children);
+      // console.log(xmlfile.getElementsByTagName(tag)[0].children,"yeet");
+      setXML(xmlfile.children)
+      
+      
+     
+
+    }).catch(e=>console.log('error is:', e))
+      
+      
+  }
+
+  const playVideo = (vid) =>
+  {
+    setVideo(<VideoPlayer url={'https://scaz.streamingchurch.tv:1935/7410/7410/playlist.m3u8'}/>)
+  }
+
   useEffect(()=>
   {
-    setPage(<HomePage data={XML}/>)
-    getXML('http://streamingchurch.tv/roku/sctv/xml/categories_new.xml', 'categories')
+    setPage(<HomePage data={XML} getSub={getXMLSub} type={locat}/>)
+    // getXML('https://streamingchurch.tv/roku/sctv/xml/categories_new.xml', 'categories')
+    getXMLSub('https://admin.streamingchurch.tv/roku/sctv/xml/church1.xml', 'feed')
   },[])
 
   useEffect(()=>
   {
-    setPage(<HomePage data={XML}/>)
+    console.log('data 1', XML)
+    setPage(<HomePage data={XML} getSub={getXMLSub} type={locat} setLocation={setLocat} playVideo={playVideo}/>)
     
-  },[XML])
+  },[XML, locat])
 
   return (
     <>
-      <SafeAreaView style={styles.view}>
-        <NavBar/>
-        {/* {page} */}
-        <VideoPlayer/>
+      {/* <SafeAreaView style={styles.view}> */}
+        {/* <NavBar/>
+        {page}
+        {video} */}
+        <VideoPlayer url={'https://5d00db0e0fcd5.streamlock.net:443/7410/7410/playlist.m3u8'}/> 
         
-      </SafeAreaView>
+      {/* </SafeAreaView> */}
     </>
   );
 };
@@ -86,7 +114,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.lighter,
     justifyContent:'center',
     alignItems:'center',
-    overflow:'visible'
+    overflow:'visible',
+  
   },
   engine: {
     position: 'absolute',

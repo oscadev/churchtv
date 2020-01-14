@@ -17,7 +17,6 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* churchtvTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* churchtvTests.m */; };
 		2F5EE06923C518B8008D1C51 /* libreact-native-video-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F5EE06823C518B8008D1C51 /* libreact-native-video-tvOS.a */; };
-		2F5EE06B23C51C76008D1C51 /* libreact-native-video-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F5EE06A23C51C76008D1C51 /* libreact-native-video-iOS.a */; };
 		5F8778A68A0DF8358530D8E4 /* libPods-churchtv-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BC1B8E47CDFF992E996CC92 /* libPods-churchtv-tvOS.a */; };
 		6888B7CDE1A3E1DA0CAF870B /* libPods-churchtv-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 048665E8E945B9F0CF89CCEF /* libPods-churchtv-tvOSTests.a */; };
 		D3981C045D2B609B9F04FB13 /* libPods-churchtvTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 005A36601F12962D2573BD95 /* libPods-churchtvTests.a */; };
@@ -94,7 +93,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F5EE06B23C51C76008D1C51 /* libreact-native-video-iOS.a in Frameworks */,
 				2F5EE06923C518B8008D1C51 /* libreact-native-video-tvOS.a in Frameworks */,
 				5F8778A68A0DF8358530D8E4 /* libPods-churchtv-tvOS.a in Frameworks */,
 			);

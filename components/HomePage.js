@@ -28,6 +28,9 @@ export const HomePage = (props) => {
                 removeClippedSubviews={false}
                 key={i} 
                 style={[styles.item, {zIndex:focused===i?1:0 }]} 
+                onPress={()=>{
+                    props.setLocation('sub')
+                    props.getSub('https' + arr[i].children[0].attributes.feed.slice(4), "feed")}}
                 
                 hasTVPreferredFocus={focused===i?true:false} 
                 activeOpacity={1.0} 
@@ -58,8 +61,54 @@ export const HomePage = (props) => {
         setItems(tempItems)
     }
 
+    const makeSubItems = (arr, range) => {
+        console.log("arr 2",arr)
+        const tempItems = [];
+
+        for(let i = range[0]; i<=range[1];i++){
+            let link = 'https' + arr[i].attributes.hdImg.slice(4);
+           
+            tempItems.push(
+                <TouchableOpacity 
+                removeClippedSubviews={false}
+                key={i} 
+                style={[styles.item, {zIndex:focused===i?1:0 }]} 
+                onPress={()=>props.playVideo('https' + arr[i].children[5].children[2].value.slice(4), "video")}
+                
+                hasTVPreferredFocus={focused===i?true:false} 
+                activeOpacity={1.0} 
+                onFocus={()=>{
+                    setFocused(i);
+                    setDescription(arr[i].attributes.title)
+                }}
+                
+                tvParallaxProperties={{
+                    enabled: true,
+                    magnification: 1.2,
+                    
+                }}>
+                    <Text>
+                        {arr[i].children[0].value}
+                    </Text>
+                    <Image
+                        style={{width: 290, height: 218}}
+                        source={{uri: `${arr[i].attributes.title}`}}
+                        source={{uri: link}}
+                    />
+                    <Text>
+                        {arr[i].attributes.description}
+                    </Text>
+                </TouchableOpacity>
+            )
+        }
+        setItems(tempItems)
+    }
+
     useEffect(()=>{
-        if(props.data.length>0){
+        if(props.type==='sub' && props.data.length>0){
+            makeSubItems(props.data, [2,30])
+        }
+        else if(props.data.length>0){
             makeItems(props.data, [0,30])
         }
         
