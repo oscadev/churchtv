@@ -31,7 +31,7 @@ export const VideoPlayer = (props) => {
        onError={e =>console.log(e)}               // Callback when video cannot be loaded
        onFullscreenPlayerWillDismiss={e=>console.log("THIS IS EEEEEEEE", e)}
        style={styles.backgroundVideo} 
-       fullscreen={false}
+       fullscreen={true}
        playInBackground={false}
                     playWhenInactive={true}
                     // hls={true}
@@ -46,10 +46,10 @@ export const VideoPlayer = (props) => {
 var styles = StyleSheet.create({
     backgroundVideo: {
       position: 'absolute',
-      // top: 0,
-      // left: 0,
-      // bottom: 0,
-      // right: 0,
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
       width:Dimensions.get('screen').width,
       height:Dimensions.get('screen').height,
       backgroundColor: 'green'

@@ -32,7 +32,7 @@ import { VideoPlayer } from './components/VideoPlayer';
 
 const App = () => {
   const [page, setPage] = useState([])
-  const [locat, setLocat] = useState('sub')
+  const [locat, setLocat] = useState('top')
   const [XML, setXML] = useState([]);
   const XMLParser = require('react-xml-parser');
   const [video, setVideo] = useState(null);
@@ -76,15 +76,15 @@ const App = () => {
   }
 
   const playVideo = (vid) =>
-  {
-    setVideo(<VideoPlayer url={'https://scaz.streamingchurch.tv:1935/7410/7410/playlist.m3u8'}/>)
+  { 
+    setVideo(<VideoPlayer url={vid}/>)
   }
 
   useEffect(()=>
   {
     setPage(<HomePage data={XML} getSub={getXMLSub} type={locat}/>)
-    // getXML('https://streamingchurch.tv/roku/sctv/xml/categories_new.xml', 'categories')
-    getXMLSub('https://admin.streamingchurch.tv/roku/sctv/xml/church1.xml', 'feed')
+    getXML('https://streamingchurch.tv/roku/sctv/xml/categories_new.xml', 'categories')
+    // getXMLSub('https://admin.streamingchurch.tv/roku/sctv/xml/church1.xml', 'feed')
   },[])
 
   useEffect(()=>
@@ -94,17 +94,32 @@ const App = () => {
     
   },[XML, locat])
 
-  return (
-    <>
-      {/* <SafeAreaView style={styles.view}> */}
-        {/* <NavBar/>
-        {page}
-        {video} */}
-        <VideoPlayer url={'https://5d00db0e0fcd5.streamlock.net:443/7410/7410/playlist.m3u8'}/> 
+  if(video===null){
+    return (
+      <>
+        <SafeAreaView style={styles.view}>
+          <NavBar/>
+          {page}
+          {video}
+          {/* <VideoPlayer url={'https://5d00db0e0fcd5.streamlock.net:443/7410/7410/playlist.m3u8'}/>  */}
+          
+        </SafeAreaView>
+      </>
+    );
+  }else{
+    return (
+      <>
+       
+         
+          {video}
+
+          
         
-      {/* </SafeAreaView> */}
-    </>
-  );
+      </>
+    );
+    
+  }
+  
 };
 
 

@@ -108,7 +108,7 @@ export const HomePage = (props) => {
         if(props.type==='sub' && props.data.length>0){
             makeSubItems(props.data, [2,30])
         }
-        else if(props.data.length>0){
+        else if(props.type==='top' && props.data.length>0){
             makeItems(props.data, [0,30])
         }
         
