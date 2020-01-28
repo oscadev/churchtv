@@ -38,6 +38,8 @@ target 'churchtv' do
 
   pod 'react-native-video', :path => '../node_modules/react-native-video'
 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
   target 'churchtvTests' do
     inherit! :search_paths
     # Pods for testing

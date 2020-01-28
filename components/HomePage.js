@@ -62,7 +62,7 @@ export const HomePage = (props) => {
     }
 
     const makeSubItems = (arr, range) => {
-        console.log("arr 2",arr)
+
         const tempItems = [];
 
         for(let i = range[0]; i<=range[1];i++){

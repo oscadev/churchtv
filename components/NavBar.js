@@ -1,14 +1,11 @@
 import React from 'react'
-import {TouchableOpacity, View, Text, StyleSheet} from 'react-native'
+import {TouchableOpacity, View, Text, StyleSheet, Image} from 'react-native';
+
 
 export const NavBar = () => {
     return (
-        <View style={styles.nav}>
-            <TouchableOpacity style={styles.bar} activeOpacity={0.8} tvParallaxProperties={{
-                magnification: 1.2
-            }}>
-                <Text style={styles.desc}>GO BACK</Text>
-            </TouchableOpacity>
+        <View style={styles.bar}><Image resizeMode="contain" style={{width:600, marginLeft:64}} source={require('../assets/logo2.png')}></Image>
+        {/* <Text style={{fontSize:48, fontFamily: 'Avenir-Medium', padding:16, color: 'black'}}>STREAMINGCHURCH.tv</Text> */}
         </View>
     )
 }
@@ -26,23 +23,7 @@ const styles = StyleSheet.create({
         overflow:'visible'
         
     },
-    bar: {
-        width:'100%',
-        display: 'flex',
-        // flexWrap: 'wrap',
-        flexDirection: 'row',
-        
-        justifyContent: 'center',
-        alignItems: 'center',
-        // height:'10%',
-        fontFamily: 'Menlo',
-        fontSize: 35,
-        color: 'lightblue',
-        // position:'absolute',
-        // top:200,
-        overflow:'visible'
-        
-    },
+
     item: {
         display: 'flex',
         flexDirection: 'column',
@@ -74,5 +55,14 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
         
 
+    },
+    bar: {
+        width:'100%',
+        height:128,
+        backgroundColor:'rgb(39, 86, 138)',
+        justifyContent:'center',
+        flexDirection:'row',
+        justifyContent:'flex-start',
+        alignItems:'center'
     }
   });

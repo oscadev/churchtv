@@ -180,6 +180,8 @@ PODS:
     - React-cxxreact (= 0.61.5-0)
     - React-jsi (= 0.61.5-0)
   - React-jsinspector (0.61.5-0)
+  - react-native-safe-area-context (0.6.2):
+    - React
   - react-native-video (5.0.2):
     - React
     - react-native-video/Video (= 5.0.2)
@@ -220,6 +222,10 @@ PODS:
     - React-cxxreact (= 0.61.5-0)
     - React-jsi (= 0.61.5-0)
     - ReactCommon/jscallinvoker (= 0.61.5-0)
+  - RNCMaskedView (0.1.6):
+    - React
+  - RNGestureHandler (1.5.3):
+    - React
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -239,6 +245,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
+  - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-video (from `../node_modules/react-native-video`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -251,6 +258,8 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/jscallinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -286,6 +295,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
+  react-native-safe-area-context:
+    :path: "../node_modules/react-native-safe-area-context"
   react-native-video:
     :path: "../node_modules/react-native-video"
   React-RCTActionSheet:
@@ -308,6 +319,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNCMaskedView:
+    :path: "../node_modules/@react-native-community/masked-view"
+  RNGestureHandler:
+    :path: "../node_modules/react-native-gesture-handler"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -327,6 +342,7 @@ SPEC CHECKSUMS:
   React-jsi: 3250457a02356556ff2203dcc3fd90b2d3cbea14
   React-jsiexecutor: 4a6e7ac4d18eb2c87494c9ae2d8f8c8d8d3b958f
   React-jsinspector: 5d32dec25b4d635dbb35bc47d8e7bdd5ceddcd05
+  react-native-safe-area-context: 25260c5d0b9c53fd7aa88e569e2edae72af1f6a3
   react-native-video: d01ed7ff1e38fa7dcc6c15c94cf505e661b7bfd0
   React-RCTActionSheet: 0ce814e48a58d65d2ffcd214496cc6d7c197b54d
   React-RCTAnimation: 897422240af426e888d7d2c30778200f1ebe27f6
@@ -338,8 +354,10 @@ SPEC CHECKSUMS:
   React-RCTText: f3712bf1fa4f471885da8d9c151722310afd9f22
   React-RCTVibration: 9ece00af535d1ed841878e809ffe4c2f25feb332
   ReactCommon: d0de88007c98c0d9c4faab64f5b3295e0e3577a3
+  RNCMaskedView: a88953beefbd347a29072d9eba90e42945fe291e
+  RNGestureHandler: 02905abe54e1f6e59c081a10b4bd689721e17aa6
   Yoga: c634cb71a8264c50f8f1a090a262e9283b7a99a6
 
-PODFILE CHECKSUM: acbf3c96f7f6400274a54ff2fe53101d11dada6c
+PODFILE CHECKSUM: 2c4a4ca0df920b9e6c04403022dd4c6821d4163b
 
 COCOAPODS: 1.8.4

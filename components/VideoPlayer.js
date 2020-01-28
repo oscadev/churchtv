@@ -23,18 +23,19 @@ export const VideoPlayer = (props) => {
     return (
         <View>
             <Video source={{uri: props.url}}   // Can be a URL or a local file.
-      //  ref={(r) => {
-      //    console.log('THIS IS REEEEEEF', r)
-      //    setRef(r)
-      //  }}                                      // Store reference
+       ref={(r) => {
+         console.log('THIS IS REEEEEEF', r)
+         setRef(r)
+       }}                                      // Store reference
        onBuffer={console.log('buff')}                // Callback when remote video is buffering
        onError={e =>console.log(e)}               // Callback when video cannot be loaded
        onFullscreenPlayerWillDismiss={e=>console.log("THIS IS EEEEEEEE", e)}
        style={styles.backgroundVideo} 
        fullscreen={true}
-       playInBackground={false}
+       playInBackground={true}
                     playWhenInactive={true}
-                    // hls={true}
+                    
+                    hls={true}
                     
        
        />
@@ -50,7 +51,7 @@ var styles = StyleSheet.create({
       left: 0,
       bottom: 0,
       right: 0,
-      width:Dimensions.get('screen').width,
+      width:Dimensions.get('screen').width/2,
       height:Dimensions.get('screen').height,
       backgroundColor: 'green'
     },
