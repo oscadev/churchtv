@@ -45,6 +45,7 @@ const ChannelScreen = (props) => {
     const [items, setItems] = useState([]);
     const [focused, setFocused] = useState(2);
     const [description, setDescription] = useState('.');
+    const [inView, setInView] = useState(true);
 
   const getXMLSub = (url, tag) =>
   {
@@ -82,8 +83,10 @@ const ChannelScreen = (props) => {
 
                 if(arr[i].children[5].children[2].value.slice(0,5)==="https"){
                     props.navigation.navigate('Video', {video: arr[i].children[5].children[2].value})
+                    setInView(false)
                 }else{
                     props.navigation.navigate('Video', {video: 'https' + arr[i].children[5].children[2].value.slice(4)})
+                    setInView(false)
                 }
 
             }}
@@ -126,6 +129,13 @@ const ChannelScreen = (props) => {
     getXMLSub(props.navigation.getParam('url')
     , 'feed')
     console.log("is chan focused?: ",props.navigation.isFocused())
+    props.navigation.addListener(
+      'didFocus',
+      payload => {
+        setInView(true)
+      }
+  );
+    
   },[])
 
   useEffect(()=>{
@@ -133,36 +143,70 @@ const ChannelScreen = (props) => {
       makeSubItems(XML, [2,XML.length-1])
   },[XML])
 
+
+
+  if(inView){
     return (
       
-        <ImageBackground 
-        blurRadius={0} 
-        style={{width:'100%'}} 
-        source={{uri:'https://images.unsplash.com/photo-1499652848871-1527a310b13a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1867&q=80'}}
-        // source={{uri:'https://images.unsplash.com/photo-1497333558196-daaff02b56d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1949&q=80'}}
-        // source={{uri:'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80'}}
-        // source={{uri:'https://images.unsplash.com/photo-1469228252629-cbe7cb7db2c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1566&q=80'}}
-        > 
-        <NavBar/>
-        <SafeAreaView style={styles.view}>
-            <View style={{justifyContent:'flex-start', alignItems:'center', padding:64, width:Dimensions.get('window').width,}}>
-                <Text style={styles.desc}>{props.navigation.getParam('chan')}</Text>
-                <Text style={styles.desc2}>{description}</Text>
-            </View>
-            <ScrollView tyle={styles.page} horizontal={true} ontentContainerStyle={{display: 'flex', justifyContent: 'center',
-                    alignItems: 'flex-start'}}>
-                {items}
-                
-            </ScrollView>
-            <TouchableOpacity onPress={()=>props.navigation.navigate('Home')} style={{width:Dimensions.get('window').width, height:64, justifyContent:'center', alignItems:'center'}}>
-                <Text style={{backgroundColor:'white', padding:16, borderRadius:25}}>BACK</Text>
-            </TouchableOpacity>
+      <ImageBackground 
+      blurRadius={0} 
+      style={{width:'100%'}} 
+      source={{uri:'https://images.unsplash.com/photo-1499652848871-1527a310b13a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1867&q=80'}}
+      // source={{uri:'https://images.unsplash.com/photo-1497333558196-daaff02b56d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1949&q=80'}}
+      // source={{uri:'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80'}}
+      // source={{uri:'https://images.unsplash.com/photo-1469228252629-cbe7cb7db2c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1566&q=80'}}
+      > 
+      <NavBar/>
+      <SafeAreaView style={styles.view}>
+          <View style={{justifyContent:'flex-start', alignItems:'center', padding:64, width:Dimensions.get('window').width,}}>
+              <Text style={styles.desc}>{props.navigation.getParam('chan')}</Text>
+              <Text style={styles.desc2}>{description}</Text>
+          </View>
+          <ScrollView tyle={styles.page} horizontal={true} ontentContainerStyle={{display: 'flex', justifyContent: 'center',
+                  alignItems: 'flex-start'}}>
+              {items}
+              
+          </ScrollView>
+          <TouchableOpacity onPress={()=>props.navigation.navigate('Home')} style={{width:Dimensions.get('window').width, height:64, justifyContent:'center', alignItems:'center'}}>
+              <Text style={{backgroundColor:'white', padding:16, borderRadius:25}}>BACK</Text>
+          </TouchableOpacity>
 
-        </SafeAreaView>
-        
-        </ImageBackground>
-       
-    );
+      </SafeAreaView>
+      
+      </ImageBackground>
+     
+  );
+  } else {
+    return (
+      <ImageBackground 
+      blurRadius={0} 
+      style={{width:'100%'}} 
+      source={{uri:'https://images.unsplash.com/photo-1499652848871-1527a310b13a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1867&q=80'}}
+      // source={{uri:'https://images.unsplash.com/photo-1497333558196-daaff02b56d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1949&q=80'}}
+      // source={{uri:'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80'}}
+      // source={{uri:'https://images.unsplash.com/photo-1469228252629-cbe7cb7db2c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1566&q=80'}}
+      > 
+      <NavBar/>
+      <SafeAreaView style={styles.view}>
+          <View style={{justifyContent:'flex-start', alignItems:'center', padding:64, width:Dimensions.get('window').width,}}>
+              <Text style={styles.desc}>{props.navigation.getParam('chan')}</Text>
+              <Text style={styles.desc2}>{description}</Text>
+          </View>
+          <ScrollView tyle={styles.page} horizontal={true} ontentContainerStyle={{display: 'flex', justifyContent: 'center',
+                  alignItems: 'flex-start'}}>
+             
+              
+          </ScrollView>
+          <TouchableOpacity onPress={()=>props.navigation.navigate('Home')} style={{width:Dimensions.get('window').width, height:64, justifyContent:'center', alignItems:'center'}}>
+              <Text style={{backgroundColor:'white', padding:16, borderRadius:25}}>BACK</Text>
+          </TouchableOpacity>
+
+      </SafeAreaView>
+      
+      </ImageBackground>
+    )
+  }
+    
   
     
   
