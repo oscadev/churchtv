@@ -32,6 +32,7 @@ const Navigator = createStackNavigator({
     Video: { screen: Video },
 },
 {
+    mode: 'modal',
     headerMode: 'none',
     navigationOptions: {
       headerVisible: false,
