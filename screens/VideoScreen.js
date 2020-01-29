@@ -1,24 +1,40 @@
 import React from 'react'
 import {StyleSheet, TVMenuControl} from 'react-native';
 import Video from 'react-native-video';
-import { VideoPlayer } from '../components/VideoPlayer'
+
 
 const VideoScreen = (props) => {
+    const [reff, setReff] = React.useState(null)
+    const [rate, setRate] = React.useState(1)
+    const [bool, setBool] = React.useState(false)
 
     React.useEffect(()=>{
         TVMenuControl.enableTVMenuKey()
+        console.log("is video focused?: ",props.navigation.isFocused())
+
     },[])
+
+
+
+
 
     return (
         <Video source={{uri: props.navigation.getParam('video')}}   // Can be a URL or a local file.
        ref={(ref) => {
-         this.player = ref
-       }}                                      // Store reference
+         setReff(ref)
+
+       }}   
+                                       // Store reference
        onBuffer={this.onBuffer}                // Callback when remote video is buffering
-       onError={this.videoError}               // Callback when video cannot be loaded
+    //    onError={props.navigation.goBack()}  
        style={styles.backgroundVideo} 
-       fullscreen={false}
-       fullscreenOrientation={'landscape'}
+       controls={true}
+
+       
+       
+
+       rate={1}
+       
        />
     )
 }

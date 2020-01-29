@@ -41,7 +41,7 @@ const HomeScreen = (props) => {
     const [video, setVideo] = useState(null);
     const [items, setItems] = useState([]);
     const [focused, setFocused] = useState(0);
-    const [description, setDescription] = useState('');
+    const [description, setDescription] = useState('.');
 
   
 
@@ -63,8 +63,8 @@ const HomeScreen = (props) => {
       
   }
 
-  const chooseChannel = (url) => {
-    props.navigation.navigate('Channel', {url: url})
+  const chooseChannel = (url,chan) => {
+    props.navigation.navigate('Channel', {url: url, chan:chan})
     setFocused(null)
     console.log('url is', url)
   }
@@ -82,7 +82,7 @@ const HomeScreen = (props) => {
             key={i} 
             style={[styles.item, {zIndex:focused===i?1:0 }]} 
             onPress={()=>{
-                chooseChannel('https' + arr[i].children[0].attributes.feed.slice(4));
+                chooseChannel('https' + arr[i].children[0].attributes.feed.slice(4), arr[i].attributes.title.slice(0,arr[i].attributes.title.length-11).toUpperCase());
                 // props.setLocation('sub')
                 // props.getSub('https' + arr[i].children[0].attributes.feed.slice(4), "feed")
             }}
@@ -90,9 +90,12 @@ const HomeScreen = (props) => {
             hasTVPreferredFocus={focused===i?true:false} 
             activeOpacity={1.0} 
             onFocus={()=>{
-                console.log('focused home', i)
+                console.log('focused item in HomeScreem is: ', i)
                 setFocused(i);
                 setDescription(arr[i].attributes.title.slice(0,arr[i].attributes.title.length-11).toUpperCase())
+                if(i==1){
+                    props.navigation.navigate('Home')
+                }
             }}
             
             tvParallaxProperties={{
@@ -121,6 +124,7 @@ const HomeScreen = (props) => {
         {
             TVMenuControl.disableTVMenuKey()
             getXML('https://streamingchurch.tv/roku/sctv/xml/categories_new.xml', 'categories')
+            console.log("is home focused?: ",props.navigation.isFocused())
 
         },[]);
     
@@ -144,7 +148,7 @@ const HomeScreen = (props) => {
         <SafeAreaView style={styles.view}>
 
                 <Text style={styles.desc}>{description}</Text> 
-               <ScrollView removeClippedSubviews={false} style={styles.page} horizontal={true} contentContainerStyle={{display: 'flex', justifyContent: 'center',
+               <ScrollView style={styles.page} horizontal={true} contentContainerStyle={{display: 'flex', justifyContent: 'center',
                     alignItems: 'flex-start',}}>
                     {items}
                     
@@ -240,7 +244,7 @@ item: {
     margin:32,
 },
 desc: {
-    fontSize:48, fontFamily: 'Avenir-Medium', padding:16, color: 'white', marginTop:128
+    fontSize:48, fontFamily: 'Avenir-Medium', padding:16, color: 'white', marginVertical:64
     
 },
 bar: {

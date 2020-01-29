@@ -4,7 +4,7 @@ import {TouchableOpacity, View, Text, StyleSheet, Image} from 'react-native';
 
 export const NavBar = () => {
     return (
-        <View style={styles.bar}><Image resizeMode="contain" style={{width:600, marginLeft:64}} source={require('../assets/logo2.png')}></Image>
+        <View style={styles.bar}><Image resizeMode="contain" style={{height:128, marginLeft:64}} source={require('../assets/logo2-white.png')}></Image>
         {/* <Text style={{fontSize:48, fontFamily: 'Avenir-Medium', padding:16, color: 'black'}}>STREAMINGCHURCH.tv</Text> */}
         </View>
     )
@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
         width:'100%',
         height:128,
         backgroundColor:'rgb(39, 86, 138)',
+        backgroundColor:'white',
         justifyContent:'center',
         flexDirection:'row',
         justifyContent:'flex-start',
