@@ -19,7 +19,8 @@ import {
   TVMenuControl,
   ImageBackground,
   Dimensions,
-  TouchableHighlight
+  TouchableHighlight,
+  ActivityIndicator
   
 } from 'react-native';
 
@@ -42,9 +43,9 @@ const ChannelScreen = (props) => {
     const [XML, setXML] = useState([]);
     const XMLParser = require('react-xml-parser');
     const [video, setVideo] = useState(null);
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState([<ActivityIndicator key={0} size="large" color="lightblue" style={{height:'100%', width:600}} contentContainerStyle={{width:600}}/>]);
     const [focused, setFocused] = useState(2);
-    const [description, setDescription] = useState('.');
+    const [description, setDescription] = useState('loading');
     const [inView, setInView] = useState(true);
 
   const getXMLSub = (url, tag) =>
@@ -151,10 +152,8 @@ const ChannelScreen = (props) => {
       <ImageBackground 
       blurRadius={0} 
       style={{width:'100%'}} 
-      source={{uri:'https://images.unsplash.com/photo-1499652848871-1527a310b13a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1867&q=80'}}
-      // source={{uri:'https://images.unsplash.com/photo-1497333558196-daaff02b56d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1949&q=80'}}
-      // source={{uri:'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80'}}
-      // source={{uri:'https://images.unsplash.com/photo-1469228252629-cbe7cb7db2c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1566&q=80'}}
+      source={require('../assets/bible2.jpeg')}
+
       > 
       <NavBar/>
       <SafeAreaView style={styles.view}>
@@ -162,7 +161,7 @@ const ChannelScreen = (props) => {
               <Text style={styles.desc}>{props.navigation.getParam('chan')}</Text>
               <Text style={styles.desc2}>{description}</Text>
           </View>
-          <ScrollView tyle={styles.page} horizontal={true} ontentContainerStyle={{display: 'flex', justifyContent: 'center',
+          <ScrollView style={styles.page} horizontal={true} ontentContainerStyle={{display: 'flex', justifyContent: 'center',
                   alignItems: 'flex-start'}}>
               {items}
               
@@ -178,13 +177,12 @@ const ChannelScreen = (props) => {
   );
   } else {
     return (
+      
       <ImageBackground 
       blurRadius={0} 
       style={{width:'100%'}} 
-      source={{uri:'https://images.unsplash.com/photo-1499652848871-1527a310b13a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1867&q=80'}}
-      // source={{uri:'https://images.unsplash.com/photo-1497333558196-daaff02b56d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1949&q=80'}}
-      // source={{uri:'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80'}}
-      // source={{uri:'https://images.unsplash.com/photo-1469228252629-cbe7cb7db2c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1566&q=80'}}
+      source={require('../assets/bible2.jpeg')}
+
       > 
       <NavBar/>
       <SafeAreaView style={styles.view}>
@@ -192,26 +190,19 @@ const ChannelScreen = (props) => {
               <Text style={styles.desc}>{props.navigation.getParam('chan')}</Text>
               <Text style={styles.desc2}>{description}</Text>
           </View>
-          <ScrollView tyle={styles.page} horizontal={true} ontentContainerStyle={{display: 'flex', justifyContent: 'center',
+          <ScrollView style={styles.page} horizontal={true} ontentContainerStyle={{display: 'flex', justifyContent: 'center',
                   alignItems: 'flex-start'}}>
-             
+<ActivityIndicator key={0} size="large" color="lightblue" style={{height:'100%', width:600}} contentContainerStyle={{width:600}}/>
               
           </ScrollView>
-          <TouchableOpacity onPress={()=>props.navigation.navigate('Home')} style={{width:Dimensions.get('window').width, height:64, justifyContent:'center', alignItems:'center'}}>
-              <Text style={{backgroundColor:'white', padding:16, borderRadius:25}}>BACK</Text>
-          </TouchableOpacity>
+
 
       </SafeAreaView>
       
       </ImageBackground>
-    )
-  }
-    
-  
-    
-  
-  
-};
+     
+  );
+    }}
 
 
 
@@ -221,7 +212,8 @@ const styles = StyleSheet.create({
     justifyContent:'flex-start',
     alignItems:'center',
     overflow:'visible',
-    minHeight:'89%'
+    minHeight:'89%',
+    overflow:'visible'
   
   },
 

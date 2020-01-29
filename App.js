@@ -14,7 +14,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 // Components
 import Home from './screens/HomeScreen';
-import Channel from './screens/Channel';
+import Channel from './screens/ChannelScreen';
 import Video from './screens/VideoScreen'
 
 

@@ -16,7 +16,9 @@ import {
   TouchableOpacity,
   Image,
   ImageBackground,
-  TVMenuControl
+  TVMenuControl,
+  ActivityIndicator,
+  Dimensions
   
 } from 'react-native';
 
@@ -34,14 +36,12 @@ import { NavBar } from '../components/NavBar';
 
 
 const HomeScreen = (props) => {
-    const [page, setPage] = useState([])
-    const [locat, setLocat] = useState('top')
+
     const [XML, setXML] = useState([]);
     const XMLParser = require('react-xml-parser');
-    const [video, setVideo] = useState(null);
     const [items, setItems] = useState([]);
-    const [focused, setFocused] = useState(0);
-    const [description, setDescription] = useState('.');
+    const [focused, setFocused] = useState(1);
+    const [description, setDescription] = useState(' ');
     const [inView, setInView] = useState(true);
 
   
@@ -99,6 +99,8 @@ const HomeScreen = (props) => {
                     props.navigation.navigate('Home')
                 }
             }}
+
+
             
             tvParallaxProperties={{
                 enabled: true,
@@ -152,10 +154,8 @@ const HomeScreen = (props) => {
         <ImageBackground 
         blurRadius={0} 
         style={{width:'100%'}} 
-        source={{uri:'https://images.unsplash.com/photo-1499652848871-1527a310b13a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1867&q=80'}}
-        source={{uri:'https://images.unsplash.com/photo-1497333558196-daaff02b56d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1949&q=80'}}
-        source={{uri:'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80'}}
-        source={{uri:'https://images.unsplash.com/photo-1469228252629-cbe7cb7db2c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1566&q=80'}}
+
+        source={require('../assets/bible.jpeg')}
         > 
         <NavBar/>
         <SafeAreaView style={styles.view}>
@@ -179,18 +179,16 @@ const HomeScreen = (props) => {
         <ImageBackground 
         blurRadius={0} 
         style={{width:'100%'}} 
-        source={{uri:'https://images.unsplash.com/photo-1499652848871-1527a310b13a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1867&q=80'}}
-        source={{uri:'https://images.unsplash.com/photo-1497333558196-daaff02b56d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1949&q=80'}}
-        source={{uri:'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80'}}
-        source={{uri:'https://images.unsplash.com/photo-1469228252629-cbe7cb7db2c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1566&q=80'}}
+
+        source={require('../assets/bible.jpeg')}
         > 
         <NavBar/>
         <SafeAreaView style={styles.view}>
 
-                <Text style={styles.desc}>Loading...</Text> 
+                <Text style={styles.desc}>{description}</Text> 
                <ScrollView style={styles.page} horizontal={true} contentContainerStyle={{display: 'flex', justifyContent: 'center',
                     alignItems: 'flex-start',}}>
-                    {/* {items} */}
+
                     
                 </ScrollView>
                 
@@ -200,7 +198,7 @@ const HomeScreen = (props) => {
 
         </SafeAreaView>
         </ImageBackground>
-      )
+    );
       
     }
     
