@@ -42,7 +42,7 @@ const HomeScreen = (props) => {
     const [items, setItems] = useState([]);
     const [focused, setFocused] = useState(0);
     const [description, setDescription] = useState('.');
-    const [inView, setInView] = useState(true);
+
 
   
 
@@ -65,7 +65,7 @@ const HomeScreen = (props) => {
   }
 
   const chooseChannel = (url,chan) => {
-    props.navigation.navigate('Channel', {url: url, chan:chan, setInView: setInView})
+    props.navigation.navigate('Channel', {url: url, chan:chan})
     setFocused(null)
     console.log('url is', url)
   }
@@ -84,7 +84,7 @@ const HomeScreen = (props) => {
             style={[styles.item, {zIndex:focused===i?1:0 }]} 
             onPress={()=>{
                 chooseChannel('https' + arr[i].children[0].attributes.feed.slice(4), arr[i].attributes.title.slice(0,arr[i].attributes.title.length-11).toUpperCase());
-                setInView(false)
+                
                 // props.setLocation('sub')
                 // props.getSub('https' + arr[i].children[0].attributes.feed.slice(4), "feed")
             }}
@@ -95,9 +95,7 @@ const HomeScreen = (props) => {
                 console.log('focused item in HomeScreem is: ', i)
                 setFocused(i);
                 setDescription(arr[i].attributes.title.slice(0,arr[i].attributes.title.length-11).toUpperCase())
-                if(i==1){
-                    props.navigation.navigate('Home')
-                }
+                
             }}
             
             tvParallaxProperties={{
@@ -127,14 +125,7 @@ const HomeScreen = (props) => {
             TVMenuControl.disableTVMenuKey()
             getXML('https://streamingchurch.tv/roku/sctv/xml/categories_new.xml', 'categories')
             console.log("is home focused?: ",props.navigation.isFocused())
-            setInView(true)
-
-            props.navigation.addListener(
-              'didFocus',
-              payload => {
-                setInView(true)
-              }
-          );
+         
 
         },[]);
     
@@ -147,7 +138,7 @@ const HomeScreen = (props) => {
 
 
 
-    if(inView){
+
       return (
         <ImageBackground 
         blurRadius={0} 
@@ -174,35 +165,7 @@ const HomeScreen = (props) => {
         </SafeAreaView>
         </ImageBackground>
     );
-    } else {
-      return (
-        <ImageBackground 
-        blurRadius={0} 
-        style={{width:'100%'}} 
-        source={{uri:'https://images.unsplash.com/photo-1499652848871-1527a310b13a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1867&q=80'}}
-        source={{uri:'https://images.unsplash.com/photo-1497333558196-daaff02b56d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1949&q=80'}}
-        source={{uri:'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80'}}
-        source={{uri:'https://images.unsplash.com/photo-1469228252629-cbe7cb7db2c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1566&q=80'}}
-        > 
-        <NavBar/>
-        <SafeAreaView style={styles.view}>
-
-                <Text style={styles.desc}>Loading...</Text> 
-               <ScrollView style={styles.page} horizontal={true} contentContainerStyle={{display: 'flex', justifyContent: 'center',
-                    alignItems: 'flex-start',}}>
-                    {/* {items} */}
-                    
-                </ScrollView>
-                
-            
-
-            
-
-        </SafeAreaView>
-        </ImageBackground>
-      )
-      
-    }
+    
     
  
   
