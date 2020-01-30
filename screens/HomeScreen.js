@@ -17,8 +17,6 @@ import {
   Image,
   ImageBackground,
   TVMenuControl,
-  ActivityIndicator,
-  Dimensions
   
 } from 'react-native';
 
@@ -26,11 +24,7 @@ import axios from 'axios';
 
 
 import {
-  Header,
-  LearnMoreLinks,
   Colors,
-  DebugInstructions,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import { NavBar } from '../components/NavBar';
 
@@ -53,7 +47,7 @@ const HomeScreen = (props) => {
       
       var xmlfile = new XMLParser().parseFromString(d.data);    // Assume xmlText contains the example XML
 
-      // console.log(xmlfile.getElementsByTagName(tag)[0].children,"yeet");
+
       setXML(xmlfile.getElementsByTagName(tag)[0].children)
       
       
@@ -67,7 +61,7 @@ const HomeScreen = (props) => {
   const chooseChannel = (url,chan) => {
     props.navigation.navigate('Channel', {url: url, chan:chan, setInView: setInView})
     setFocused(null)
-    console.log('url is', url)
+
   }
 
   const makeItems = (arr, range) => {
@@ -85,19 +79,15 @@ const HomeScreen = (props) => {
             onPress={()=>{
                 chooseChannel('https' + arr[i].children[0].attributes.feed.slice(4), arr[i].attributes.title.slice(0,arr[i].attributes.title.length-11).toUpperCase());
                 setInView(false)
-                // props.setLocation('sub')
-                // props.getSub('https' + arr[i].children[0].attributes.feed.slice(4), "feed")
             }}
             
             hasTVPreferredFocus={focused===i?true:false} 
             activeOpacity={1.0} 
             onFocus={()=>{
-                console.log('focused item in HomeScreem is: ', i)
+
                 setFocused(i);
                 setDescription(arr[i].attributes.title.slice(0,arr[i].attributes.title.length-11).toUpperCase())
-                if(i==1){
-                    props.navigation.navigate('Home')
-                }
+                
             }}
 
 
@@ -128,7 +118,7 @@ const HomeScreen = (props) => {
         {
             TVMenuControl.disableTVMenuKey()
             getXML('https://streamingchurch.tv/roku/sctv/xml/categories_new.xml', 'categories')
-            console.log("is home focused?: ",props.navigation.isFocused())
+
             setInView(true)
 
             props.navigation.addListener(
@@ -253,11 +243,7 @@ const styles = StyleSheet.create({
   page: {
     width:'100%',
     display: 'flex',
-    // flexWrap: 'wrap',
     flexDirection: 'row',
-    // backgroundColor: 'blue',
-    // justifyContent: 'center',
-    // alignItems: 'center',
     height:'100%',
     overflow:'visible',
 

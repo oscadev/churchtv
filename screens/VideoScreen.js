@@ -1,12 +1,10 @@
 import React from 'react'
-import {StyleSheet, TVMenuControl, View, Text, ActivityIndicator, Dimensions} from 'react-native';
+import {StyleSheet, TVMenuControl, View, Text, ActivityIndicator} from 'react-native';
 import Video from 'react-native-video';
 
 
 const VideoScreen = (props) => {
     const [reff, setReff] = React.useState(null)
-    const [rate, setRate] = React.useState(1)
-    const [bool, setBool] = React.useState(false)
     const [loading, setLoading] = React.useState(<View style={{width:'100%', height:'100%',backgroundColor:'rgba(39, 86, 138, 1)', justifyContent:'center', alignItems:'center'}}>
       <Text style={{color:'white', padding:64,  fontFamily: 'Avenir-Medium', color: 'white', fontSize:32}}>Loading</Text>
       <ActivityIndicator size="large" color="lightblue"/>
@@ -14,7 +12,6 @@ const VideoScreen = (props) => {
 
     React.useEffect(()=>{
         TVMenuControl.enableTVMenuKey()
-        console.log("is video focused?: ",props.navigation.isFocused())
 
     },[])
 

@@ -1,11 +1,10 @@
 import React from 'react'
-import {TouchableOpacity, View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 
 
 export const NavBar = () => {
     return (
         <View style={styles.bar}><Image resizeMode="contain" style={{height:128, marginLeft:64}} source={require('../assets/logo2-white.png')}></Image>
-        {/* <Text style={{fontSize:48, fontFamily: 'Avenir-Medium', padding:16, color: 'black'}}>STREAMINGCHURCH.tv</Text> */}
         </View>
     )
 }
@@ -14,11 +13,7 @@ const styles = StyleSheet.create({
     nav: {
         width:'100%',
         display: 'flex',
-        // flexWrap: 'wrap',
         flexDirection: 'row',
-        // backgroundColor: 'blue',
-        // justifyContent: 'center',
-        // alignItems: 'center',
         height:'5%',
         overflow:'visible'
         

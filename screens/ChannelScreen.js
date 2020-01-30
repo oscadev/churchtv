@@ -15,11 +15,9 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  Button,
   TVMenuControl,
   ImageBackground,
   Dimensions,
-  TouchableHighlight,
   ActivityIndicator
   
 } from 'react-native';
@@ -28,21 +26,14 @@ import axios from 'axios';
 
 
 import {
-  Header,
-  LearnMoreLinks,
   Colors,
-  DebugInstructions,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import { NavBar } from '../components/NavBar';
 
 
 const ChannelScreen = (props) => {
-    const [page, setPage] = useState([])
-    const [locat, setLocat] = useState('top')
     const [XML, setXML] = useState([]);
     const XMLParser = require('react-xml-parser');
-    const [video, setVideo] = useState(null);
     const [items, setItems] = useState([<ActivityIndicator key={0} size="large" color="lightblue" style={{height:'100%', width:600}} contentContainerStyle={{width:600}}/>]);
     const [focused, setFocused] = useState(2);
     const [description, setDescription] = useState('loading');
@@ -50,18 +41,15 @@ const ChannelScreen = (props) => {
 
   const getXMLSub = (url, tag) =>
   {
-    console.log('ran sub 1, url:', url)
     axios.get(url).then(d=>{
-      console.log('ran sub 2')
       var xmlfile = new XMLParser().parseFromString(d.data);    // Assume xmlText contains the example XML
 
-      // console.log(xmlfile.getElementsByTagName(tag)[0].children,"yeet");
       setXML(xmlfile.children)
       
       
      
 
-    }).catch(e=>console.log('error is:', e))
+    })
       
       
   }
@@ -95,7 +83,6 @@ const ChannelScreen = (props) => {
             hasTVPreferredFocus={focused===i?true:false} 
             activeOpacity={1.0} 
             onFocus={()=>{
-                console.log('focused item in ChannelScreen is: ', i)
                 setFocused(i);
                 setDescription(arr[i].children[0].value)
             }}
@@ -126,10 +113,10 @@ const ChannelScreen = (props) => {
   useEffect(()=>
   {
     TVMenuControl.enableTVMenuKey()
-    console.log('focused is:', focused)
+
     getXMLSub(props.navigation.getParam('url')
     , 'feed')
-    console.log("is chan focused?: ",props.navigation.isFocused())
+
     props.navigation.addListener(
       'didFocus',
       payload => {
@@ -249,11 +236,7 @@ const styles = StyleSheet.create({
   page: {
     width:'100%',
     display: 'flex',
-    // flexWrap: 'wrap',
     flexDirection: 'row',
-    // backgroundColor: 'blue',
-    // justifyContent: 'center',
-    // alignItems: 'center',
     height:'100%',
     overflow:'visible'
     

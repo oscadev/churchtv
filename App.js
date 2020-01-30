@@ -18,7 +18,6 @@ import Channel from './screens/ChannelScreen';
 import Video from './screens/VideoScreen'
 
 
-// import Profile from './src/Profile';
 
 /**
  * createStackNavigator
