@@ -135,6 +135,7 @@ const HomeScreen = (props) => {
               'didFocus',
               payload => {
                 setInView(true)
+                TVMenuControl.disableTVMenuKey()
               }
           );
 
