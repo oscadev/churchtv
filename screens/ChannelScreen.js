@@ -29,6 +29,7 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 import { NavBar } from '../components/NavBar';
+import config from '../individual';
 
 
 const ChannelScreen = (props) => {
@@ -139,7 +140,7 @@ const ChannelScreen = (props) => {
       <ImageBackground 
       blurRadius={0} 
       style={{width:'100%'}} 
-      source={require('../assets/bible2.jpeg')}
+      source={config.backgroundSecondScreen}
 
       > 
       <NavBar/>
@@ -168,7 +169,7 @@ const ChannelScreen = (props) => {
       <ImageBackground 
       blurRadius={0} 
       style={{width:'100%'}} 
-      source={require('../assets/bible2.jpeg')}
+      source={config.backgroundSecondScreen}
 
       > 
       <NavBar/>

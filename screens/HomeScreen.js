@@ -27,6 +27,7 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 import { NavBar } from '../components/NavBar';
+import config from '../individual';
 
 
 const HomeScreen = (props) => {
@@ -69,7 +70,20 @@ const HomeScreen = (props) => {
     const tempItems = [];
 
     for(let i = range[0]; i<=range[1];i++){
-        let link = 'https' + arr[i].attributes.hd_img.slice(4);
+      console.log("XXXXXXXXMMMMMMMMMMLLLLLLLLLL 2222222222222: ", arr[i] )
+        let link;
+         
+         if(arr[i].attributes.hd_img.slice(0,5)==="https"){
+          link = arr[i].attributes.hd_img;
+        } else {
+          link = 'https' + arr[i].attributes.hd_img.slice(4);
+        }
+        let url;
+        if(arr[i].children[0].attributes.feed.slice(0,5)==="https"){
+          url = arr[i].children[0].attributes.feed
+        } else {
+          url = 'https' + arr[i].children[0].attributes.feed.slice(4)
+        }
        
         tempItems.push(
             <TouchableOpacity 
@@ -77,7 +91,7 @@ const HomeScreen = (props) => {
             key={i} 
             style={[styles.item, {zIndex:focused===i?1:0 }]} 
             onPress={()=>{
-                chooseChannel('https' + arr[i].children[0].attributes.feed.slice(4), arr[i].attributes.title.slice(0,arr[i].attributes.title.length-11).toUpperCase());
+                chooseChannel(url, arr[i].attributes.title.toUpperCase());
                 setInView(false)
             }}
             
@@ -86,7 +100,7 @@ const HomeScreen = (props) => {
             onFocus={()=>{
 
                 setFocused(i);
-                setDescription(arr[i].attributes.title.slice(0,arr[i].attributes.title.length-11).toUpperCase())
+                setDescription(arr[i].attributes.title.toUpperCase())
                 
             }}
 
@@ -117,7 +131,7 @@ const HomeScreen = (props) => {
     useEffect(()=>
         {
             TVMenuControl.disableTVMenuKey()
-            getXML('https://streamingchurch.tv/roku/sctv/xml/categories_new.xml', 'categories')
+            getXML(config.URL, 'categories')
 
             setInView(true)
 
@@ -132,8 +146,9 @@ const HomeScreen = (props) => {
         },[]);
     
     useEffect(()=>{
+      console.log("XXXXXXXXMMMMMMMMMMMMLLLLLLLLLLLLLLL: ", XML)
         if(XML.length>0)
-        makeItems(XML, [0,XML.length-1])
+        makeItems(XML, [1,XML.length-1])
     },[XML])
 
 
@@ -146,7 +161,7 @@ const HomeScreen = (props) => {
         blurRadius={0} 
         style={{width:'100%'}} 
 
-        source={require('../assets/bible.jpeg')}
+        source={config.backgroundFirstScreen}
         > 
         <NavBar/>
         <SafeAreaView style={styles.view}>
@@ -171,7 +186,7 @@ const HomeScreen = (props) => {
         blurRadius={0} 
         style={{width:'100%'}} 
 
-        source={require('../assets/bible.jpeg')}
+        source={config.backgroundFirstScreen}
         > 
         <NavBar/>
         <SafeAreaView style={styles.view}>

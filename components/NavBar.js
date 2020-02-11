@@ -1,10 +1,11 @@
 import React from 'react'
 import {View, Text, StyleSheet, Image} from 'react-native';
+import config from '../individual';
 
 
 export const NavBar = () => {
     return (
-        <View style={styles.bar}><Image resizeMode="contain" style={{height:128, marginLeft:64}} source={require('../assets/logo2-white.png')}></Image>
+        <View style={styles.bar}><Image resizeMode="contain" style={{height:128, marginLeft:64}} source={config.logo}></Image>
         </View>
     )
 }
