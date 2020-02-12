@@ -246,7 +246,7 @@ const HomeScreen = (props) => {
                 <Text style={styles.desc}>{description}</Text> 
                <ScrollView style={styles.page} horizontal={true} contentContainerStyle={{display: 'flex', justifyContent: 'center',
                     alignItems: 'flex-start',}}>
-                    {hasLive?[]:notLiveItem}
+
                     {items}
                     
                     
