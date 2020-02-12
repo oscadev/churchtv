@@ -38,6 +38,7 @@ const HomeScreen = (props) => {
     const [focused, setFocused] = useState(1);
     const [description, setDescription] = useState(' ');
     const [inView, setInView] = useState(true);
+    const [hasLive, setHasLive] = useState(false);
 
   
 
@@ -58,6 +59,38 @@ const HomeScreen = (props) => {
       
       
   }
+
+  const notLiveItem = [<TouchableOpacity 
+  removeClippedSubviews={false}
+  key={'notlive'} 
+  style={[styles.item, {zIndex:focused==="notlive"?1:0 }]} 
+
+  
+  hasTVPreferredFocus={focused==="notlive"?true:false} 
+  activeOpacity={1.0} 
+  onFocus={()=>{
+
+      setFocused("notelive");
+      setDescription("NOT LIVE")
+      
+  }}
+
+
+  
+  tvParallaxProperties={{
+      enabled: true,
+      magnification: 1.2,
+      
+  }}>
+
+      <Image
+          style={{width: 290, height: 218}}
+
+          source={config.notLive}
+      />
+
+  </TouchableOpacity>]
+
 
   const chooseChannel = (url,chan) => {
     props.navigation.navigate('Channel', {url: url, chan:chan, setInView: setInView})
@@ -84,8 +117,10 @@ const HomeScreen = (props) => {
         } else {
           url = 'https' + arr[i].children[0].attributes.feed.slice(4)
         }
-       
-        tempItems.push(
+        if(arr[i].attributes.title=="Live"){
+          setHasLive(true)
+          console.log("WE ARE LIVE")
+          tempItems.unshift(
             <TouchableOpacity 
             removeClippedSubviews={false}
             key={i} 
@@ -124,6 +159,48 @@ const HomeScreen = (props) => {
                 </Text>
             </TouchableOpacity>
         )
+        } else {
+          tempItems.push(
+            <TouchableOpacity 
+            removeClippedSubviews={false}
+            key={i} 
+            style={[styles.item, {zIndex:focused===i?1:0 }]} 
+            onPress={()=>{
+                chooseChannel(url, arr[i].attributes.title.toUpperCase());
+                setInView(false)
+            }}
+            
+            hasTVPreferredFocus={focused===i?true:false} 
+            activeOpacity={1.0} 
+            onFocus={()=>{
+
+                setFocused(i);
+                setDescription(arr[i].attributes.title.toUpperCase())
+                
+            }}
+
+
+            
+            tvParallaxProperties={{
+                enabled: true,
+                magnification: 1.2,
+                
+            }}>
+                <Text>
+                    {arr[i].attributes.title}
+                </Text>
+                <Image
+                    style={{width: 290, height: 218}}
+                    source={{uri: `${arr[i].attributes.title}`}}
+                    source={{uri: link}}
+                />
+                <Text>
+                    {arr[i].attributes.description}
+                </Text>
+            </TouchableOpacity>
+        )
+        }
+        
     }
     setItems(tempItems)
 }
@@ -169,7 +246,9 @@ const HomeScreen = (props) => {
                 <Text style={styles.desc}>{description}</Text> 
                <ScrollView style={styles.page} horizontal={true} contentContainerStyle={{display: 'flex', justifyContent: 'center',
                     alignItems: 'flex-start',}}>
+                    {hasLive?[]:notLiveItem}
                     {items}
+                    
                     
                 </ScrollView>
                 
