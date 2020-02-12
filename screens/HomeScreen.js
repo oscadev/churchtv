@@ -103,7 +103,7 @@ const HomeScreen = (props) => {
     const tempItems = [];
 
     for(let i = range[0]; i<=range[1];i++){
-      console.log("XXXXXXXXMMMMMMMMMMLLLLLLLLLL 2222222222222: ", arr[i] )
+
         let link;
          
          if(arr[i].attributes.hd_img.slice(0,5)==="https"){
@@ -119,7 +119,7 @@ const HomeScreen = (props) => {
         }
         if(arr[i].attributes.title=="Live"){
           setHasLive(true)
-          console.log("WE ARE LIVE")
+
           tempItems.unshift(
             <TouchableOpacity 
             removeClippedSubviews={false}
@@ -223,7 +223,7 @@ const HomeScreen = (props) => {
         },[]);
     
     useEffect(()=>{
-      console.log("XXXXXXXXMMMMMMMMMMMMLLLLLLLLLLLLLLL: ", XML)
+
         if(XML.length>0)
         makeItems(XML, [1,XML.length-1])
     },[XML])
