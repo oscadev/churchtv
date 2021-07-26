@@ -1,12 +1,12 @@
 {
   "properties" : {
-    "frame-size" : {
-      "height" : 509,
-      "width" : 509
-    },
     "frame-center" : {
       "x" : 640,
       "y" : 384
+    },
+    "frame-size" : {
+      "width" : 1286.5,
+      "height" : 1063.5
     }
   },
   "info" : {
