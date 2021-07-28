@@ -38,8 +38,8 @@ const HomeScreen = ({navigation}) => {
   const [description, setDescription] = useState(' ');
   const [inView, setInView] = useState(true);
   const [hasLive, setHasLive] = useState(false);
-  const [email, setEmail] = useState('steve@streamingchurch.tv');
-  const [password, setPassword] = useState('hello123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [forgotPass, setForgotPass] = useState(false);
 
