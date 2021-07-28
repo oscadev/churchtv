@@ -242,6 +242,7 @@ const HomeScreen = ({navigation}) => {
             style={styles.input}
             placeholder="password"
             value={password}
+            secureTextEntry={true}
             onChangeText={(e) => setPassword(e)}
           />
           <Text style={styles.message}>{message}</Text>
